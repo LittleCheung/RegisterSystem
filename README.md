@@ -30,6 +30,7 @@
   - SpringCloud
     - Nacos：服务注册中心
     - OpenFeign：模块间服务调用
+    - Hystrix：服务降级熔断
     - Gateway：服务网关，实现消息转发和负载均衡
     - Task：定时任务
   - MyBatis Plus：MyBatis增强工具包，作为持久层框架操作数据库
