@@ -258,7 +258,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             Date date = dateList.get(i);
 
             BookingScheduleRuleVo bookingScheduleRuleVo = scheduleVoMap.get(date);
-            if(null == bookingScheduleRuleVo) { // 说明当天没有排班医生
+            if(null == bookingScheduleRuleVo) {
                 bookingScheduleRuleVo = new BookingScheduleRuleVo();
                 //就诊医生人数
                 bookingScheduleRuleVo.setDocCount(0);

@@ -15,8 +15,8 @@ import java.util.List;
 public interface HospitalRepository extends MongoRepository<Hospital, String> {
 
     /**
-     * //根据hoscode查询hospital,判断数据是否存在
-     * @param hoscode
+     * //根据医院编号获取医院信息,判断数据是否存在
+     * @param hoscode 医院编号
      * @return
      */
     Hospital getHospitalByHoscode(String hoscode);
@@ -24,7 +24,7 @@ public interface HospitalRepository extends MongoRepository<Hospital, String> {
 
     /**
      * 根据医院名称查询医院信息
-     * @param hosname
+     * @param hosname 医院名称
      * @return
      */
     List<Hospital> findHospitalByHosnameLike(String hosname);

@@ -45,9 +45,7 @@ public class HospitalServiceImpl implements HospitalService {
 
 
         Long hosScheduleId = Long.parseLong(hosScheduleIdString);
-        //TODO
         Schedule schedule = this.getSchedule(hosScheduleId);
-//        Schedule schedule = this.getSchedule("1L");
         if(null == schedule) {
             throw new YyghException(ResultCodeEnum.DATA_ERROR);
         }

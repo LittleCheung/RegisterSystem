@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.atguigu.yygh.cmn.mapper")
+@MapperScan("com.hospital.register.cmn.mapper")
 public class CmnConfig {
     /**
      * 分页插件
