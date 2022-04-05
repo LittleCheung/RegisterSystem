@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 数据字典模块服务调用封装
+ * TODO 需要实现服务降级熔断时，创建该接口实现类
  * @author littlecheung
  */
 @Component

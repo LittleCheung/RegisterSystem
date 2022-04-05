@@ -43,7 +43,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <scope>provided </scope>
         </dependency>
-
+        <!-- 服务降级熔断Hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

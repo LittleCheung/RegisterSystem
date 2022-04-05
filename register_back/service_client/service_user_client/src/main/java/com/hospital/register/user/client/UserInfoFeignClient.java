@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+/**
+ * 用户信息服务调用封装
+ * TODO 需要实现服务降级熔断时，创建该接口实现类
+ * @author littlecheung
+ */
 @Component
 @FeignClient("service-user")
 public interface UserInfoFeignClient {

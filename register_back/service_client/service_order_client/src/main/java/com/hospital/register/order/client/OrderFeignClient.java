@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
+/**
+ * 订单模块服务调用封装
+ * TODO 需要实现服务降级熔断时，创建该接口实现类
+ * @author littlecheung
+ */
 @Component
 @FeignClient("service-order")
 public interface OrderFeignClient {

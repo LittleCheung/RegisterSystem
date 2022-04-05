@@ -71,7 +71,6 @@ public class HospitalServiceImpl implements HospitalService {
             //记录预约记录
             OrderInfo orderInfo = new OrderInfo();
             orderInfo.setPatientId(patientId);
-            //TODO
             orderInfo.setScheduleId(hosScheduleId);
             int number = schedule.getReservedNumber().intValue() - schedule.getAvailableNumber().intValue();
             orderInfo.setNumber(number);
