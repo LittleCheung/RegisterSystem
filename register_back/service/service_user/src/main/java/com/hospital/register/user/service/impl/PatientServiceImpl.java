@@ -41,7 +41,7 @@ public class PatientServiceImpl extends ServiceImpl<PatientMapper, Patient> impl
     }
 
     /**
-     * 根据id查询就诊人信息并进行返回，返回具有完整信息的对象
+     * 根据id查询就诊人信息并进行返回具有完整信息的对象
      * @param id 就诊人id
      * @return
      */

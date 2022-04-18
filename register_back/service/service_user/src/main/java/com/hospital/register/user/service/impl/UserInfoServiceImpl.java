@@ -49,7 +49,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(code)){
             throw new RegisterException(ResultCodeEnum.PARAM_ERROR);
         }
-
+        //TODO 校验验证码
         String redisCode = redisTemplate.opsForValue().get(phone);
         if(!code.equals(redisCode)){
             //验证码错误
@@ -83,7 +83,6 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
                 baseMapper.insert(userInfo);
             }
         }
-
         //判断用户是否被禁用
         if(userInfo.getStatus() == 0){
             throw new RegisterException(ResultCodeEnum.LOGIN_DISABLED_ERROR);
@@ -98,7 +97,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             name = userInfo.getPhone();
         }
         map.put("name", name);
-        //生成token
+
+        //JWT生成token字符串
         String token = JwtHelper.createToken(userInfo.getId(), name);
         map.put("token", token);
         return map;
@@ -120,7 +120,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
 
     /**
-     * 用户根据id, userAuthVo进行认证
+     * 用户认证
      * @param userId
      * @param userAuthVo
      */
@@ -183,8 +183,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     /**
      * 根据用户id更改用户锁定状态
-     * @param userId
-     * @param status
+     * @param userId 用户id
+     * @param status 锁定状态
      */
     @Override
     public void lock(Long userId, Integer status) {
@@ -219,7 +219,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      */
     @Override
     public void approve(Long userId, Integer authStatus) {
-        if(authStatus.intValue()==2 || authStatus==-1){
+        if(authStatus ==2 || authStatus==-1){
             //2是审核通过，-1是不通过
             UserInfo userInfo = baseMapper.selectById(userId);
             userInfo.setAuthStatus(authStatus);

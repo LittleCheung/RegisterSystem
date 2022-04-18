@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Api("用户登录接口")
+/**
+ * 前台页面用户登录相关接口
+ */
+@Api("前台用户登录接口")
 @RestController
 @RequestMapping("/api/user")
 public class UserInfoApiController {
@@ -61,6 +64,4 @@ public class UserInfoApiController {
         UserInfo userInfo = userInfoService.getById(userId);
         return Result.ok(userInfo);
     }
-
-
 }
