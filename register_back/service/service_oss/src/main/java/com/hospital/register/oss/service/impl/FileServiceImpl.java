@@ -16,7 +16,7 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
 
     /**
-     * 文件上传
+     * 上传文件到阿里云oss
      * @param file
      * @return
      */
@@ -36,18 +36,14 @@ public class FileServiceImpl implements FileService {
             //上传文件流
             InputStream inputStream = file.getInputStream();
             String filename = file.getOriginalFilename();
-
             //添加随机唯一值避免同名文件覆盖
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
             filename= uuid + filename;
-
             //按照日期创建文件存储文件夹
             String timeUrl = new DateTime().toString("yyyy/MM/dd");
             filename = timeUrl + "/" + filename;
-
             // 依次填写Bucket名称（例如examplebucket）和Object完整路径（例如exampledir/exampleobject.txt），Object完整路径中不能包含Bucket名称。
             ossClient.putObject(bucket, filename, inputStream);
-
             // 关闭OSSClient。
             ossClient.shutdown();
             //返回上传后文件路径

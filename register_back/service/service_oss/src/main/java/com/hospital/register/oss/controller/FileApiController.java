@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@Api("上传认证信息接口")
+@Api("上传文件接口")
 @RestController
 @RequestMapping("/api/oss/file")
 public class FileApiController {
