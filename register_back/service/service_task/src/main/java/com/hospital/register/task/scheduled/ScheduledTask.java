@@ -1,6 +1,5 @@
 package com.hospital.register.task.scheduled;
 
-
 import com.hospital.common.rabbit.constant.MqConst;
 import com.hospital.common.rabbit.service.RabbitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * “@EnableScheduling”：表示开启定时任务
+ *
+ *
+ * “@EnableScheduling”：表示开启定时任务，cron表达式设置执行间隔
  */
 @Component
 @EnableScheduling
