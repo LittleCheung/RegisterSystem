@@ -20,7 +20,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- *
  * 全局Filter，统一处理用户登录与外部不允许访问的服务
  * @author littlecheung
  */
@@ -32,8 +31,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        String path = request.getURI().getPath();
-//        System.out.println("==="+path);
+        String path = request.getURI().getPath();;
 
         //内部服务接口，不允许外部访问
         if(antPathMatcher.match("/**/inner/**", path)) {
@@ -79,7 +77,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
      */
     private Long getUserId(ServerHttpRequest request) {
         String token = "";
+        //从请求头中获取token
         List<String> tokenList = request.getHeaders().get("token");
+        //不为空直接得到请求头中的token
         if(null  != tokenList) {
             token = tokenList.get(0);
         }
