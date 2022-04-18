@@ -6,7 +6,6 @@ import lombok.Data;
 
 /**
  * 自定义全局异常类
- *
  * @author qy
  */
 @Data
@@ -33,7 +32,7 @@ public class YyghException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "GuliException{" +
+        return "Exception{" +
                 "code=" + code +
                 ", message=" + this.getMessage() +
                 '}';
