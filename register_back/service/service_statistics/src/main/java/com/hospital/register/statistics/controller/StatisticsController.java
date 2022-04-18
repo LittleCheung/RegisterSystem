@@ -20,7 +20,7 @@ public class StatisticsController {
     private OrderFeignClient orderFeignClient;
 
     /**
-     * 获取订单统计图表
+     * 获取订单统计数据
      * @param orderCountQueryVo 订单统计对象
      * @return
      */
