@@ -8,11 +8,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * <p>
- * Department
- * </p>
- *
- * @author qy
+ * 科室实体类
+ * @author littlecheung
  */
 @Data
 @ApiModel(description = "Department")
@@ -22,11 +19,11 @@ public class Department extends BaseMongoEntity {
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "医院编号")
-	@Indexed //普通索引
+	@Indexed
 	private String hoscode;
 
 	@ApiModelProperty(value = "科室编号")
-	@Indexed(unique = true) //唯一索引
+	@Indexed(unique = true)
 	private String depcode;
 
 	@ApiModelProperty(value = "科室名称")

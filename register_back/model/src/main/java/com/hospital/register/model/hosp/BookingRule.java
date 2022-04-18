@@ -10,11 +10,8 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
- * <p>
- * RegisterRule
- * </p>
- *
- * @author qy
+ * 预约规则实体类
+ * @author littlecheung
  */
 @Data
 @ApiModel(description = "预约规则")
@@ -40,7 +37,7 @@ public class BookingRule {
 	private List<String> rule;
 
 	/**
-	 *
+	 * 设置规则
 	 * @param rule
 	 */
 	public void setRule(String rule) {

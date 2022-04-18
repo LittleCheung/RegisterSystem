@@ -11,11 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>
- * Dict
- * </p>
- *
- * @author qy
+ * 数据字典实体
+ * @author littlecheung
  */
 @Data
 @ApiModel(description = "数据字典")
@@ -61,6 +58,9 @@ public class Dict {
     @TableField("dict_code")
     private String dictCode;
 
+    /**
+     * hasChildren为树形字典所需组件，标识为数据库表不存在该字段
+     */
     @ApiModelProperty(value = "是否包含子节点")
     @TableField(exist = false)
     private boolean hasChildren;

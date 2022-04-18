@@ -12,11 +12,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * <p>
- * Schedule
- * </p>
- *
- * @author qy
+ * 排版实体类
+ * @author littlecheung
  */
 @Data
 @ApiModel(description = "Schedule")
@@ -26,11 +23,11 @@ public class Schedule extends BaseMongoEntity {
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "医院编号")
-	@Indexed //普通索引
+	@Indexed
 	private String hoscode;
 
 	@ApiModelProperty(value = "科室编号")
-	@Indexed //普通索引
+	@Indexed
 	private String depcode;
 
 	@ApiModelProperty(value = "职称")

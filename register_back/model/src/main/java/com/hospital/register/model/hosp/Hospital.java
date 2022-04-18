@@ -9,10 +9,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * <p>
- * Hospital
- * </p>
- *
+ * 医院基础信息实体类
  * @author qy
  */
 @Data
@@ -21,13 +18,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Hospital extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * unique = true：表示唯一索引
+	 */
 	@ApiModelProperty(value = "医院编号")
-	@Indexed(unique = true) //唯一索引
+	@Indexed(unique = true)
 	private String hoscode;
 
 	@ApiModelProperty(value = "医院名称")
-	@Indexed //普通索引
+	@Indexed
 	private String hosname;
 
 	@ApiModelProperty(value = "医院类型")
@@ -60,7 +60,10 @@ public class Hospital extends BaseMongoEntity {
 	//预约规则
 	@ApiModelProperty(value = "预约规则")
 	private BookingRule bookingRule;
-
+	/**
+	 * 设置预约规则
+	 * @param bookingRule
+	 */
 	public void setBookingRule(String bookingRule) {
 		this.bookingRule = JSONObject.parseObject(bookingRule, BookingRule.class);
 	}

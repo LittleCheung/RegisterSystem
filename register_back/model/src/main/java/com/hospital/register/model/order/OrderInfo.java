@@ -12,11 +12,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * <p>
- * Order
- * </p>
- *
- * @author qy
+ * 订单信息实体
+ * @author littlecheung
  */
 @Data
 @ApiModel(description = "Order")

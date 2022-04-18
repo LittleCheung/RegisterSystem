@@ -8,10 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * <p>
- * HospitalSet
- * </p>
- *
+ * 医院设置实体类
  * @author qy
  */
 @Data
