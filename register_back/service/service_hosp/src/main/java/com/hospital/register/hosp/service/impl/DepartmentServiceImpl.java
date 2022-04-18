@@ -89,7 +89,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     /**
-     * 根据hoscode查询医院所有科室,及其子科室
+     * 根据医院编号查询医院所有科室,及其子科室列表
      * @param hoscode
      * @return
      */
@@ -98,10 +98,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         //创建list集合，用于最终数据的封装
         List<DepartmentVo> result = new ArrayList<>();
 
-        //根据医院编号hoscode查询医院所有科室信息
+        //根据医院编号查询医院所有科室信息
         Department departmentQuery = new Department();
         departmentQuery.setHoscode(hoscode);
-        Example example = Example.of(departmentQuery);
+        Example<Department> example = Example.of(departmentQuery);
         //所有科室列表
         List<Department> departmentList = departmentRepository.findAll(example);
 
@@ -119,7 +119,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             DepartmentVo departmentVo1 = new DepartmentVo();
             departmentVo1.setDepcode(bigCode);
             departmentVo1.setDepname(departments.get(0).getBigname());
-
             //封装小科室
             List<DepartmentVo> children = new ArrayList<>();
             for (Department department : departments) {
@@ -134,7 +133,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             //最后放到result
             result.add(departmentVo1);
         }
-
         return result;
     }
 

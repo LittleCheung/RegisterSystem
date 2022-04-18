@@ -21,10 +21,10 @@ public interface ScheduleRepository extends MongoRepository<Schedule,String> {
     Schedule getScheduleByHoscodeAndHosScheduleId(String hoscode, String hosScheduleId);
 
     /**
-     * 根据医院编号、科室编号和具体日期查询排班信息
+     * 根据医院编号、科室编号和工作日期查询排班详细信息
      * @param hoscode 医院编号
      * @param depcode 科室编号
-     * @param toDate 具体日期
+     * @param toDate 工作日期
      * @return
      */
     List<Schedule> findScheduleByHoscodeAndDepcodeAndWorkDate(String hoscode, String depcode, Date toDate);

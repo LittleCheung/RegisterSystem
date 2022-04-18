@@ -45,19 +45,16 @@ public class HospitalReceiver {
         if(null != orderMqVo.getAvailableNumber()) {
             //下单成功更新预约数
             Schedule schedule = scheduleService.getScheduleById(orderMqVo.getScheduleId());
-            System.out.println("if --- " + schedule);
             schedule.setReservedNumber(orderMqVo.getReservedNumber());
             schedule.setAvailableNumber(orderMqVo.getAvailableNumber());
             scheduleService.update(schedule);
         } else {
             //取消预约更新预约数
             Schedule schedule = scheduleService.getScheduleById(orderMqVo.getScheduleId());
-            System.out.println("else --- " + schedule);
             int availableNumber = schedule.getAvailableNumber().intValue() + 1;
             schedule.setAvailableNumber(availableNumber);
             scheduleService.update(schedule);
         }
-
         //发送短信，下单或者取消预约都发信息给用户
         MsmVo msmVo = orderMqVo.getMsmVo();
         if(null != msmVo) {

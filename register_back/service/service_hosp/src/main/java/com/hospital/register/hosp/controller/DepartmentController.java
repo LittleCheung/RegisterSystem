@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 处理科室请求
+ */
 @Api("科室展示接口")
 @RestController
 @RequestMapping("/admin/hosp/department")
@@ -20,8 +23,8 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     /**
-     * 根据hoscode查询医院所有科室
-     * @param hoscode
+     * 根据医院编号查询医院所有科室列表
+     * @param hoscode 医院编号
      * @return
      */
     @ApiOperation("查询医院所有科室列表")

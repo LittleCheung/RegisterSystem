@@ -27,8 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * 与医院管理系统对接的医院、科室和排班接口
+ * 与医院管理系统对接的医院、科室和排班上传接口
  * @author littlecheung
+ *
+ * 说明：平台对外开发的接口都写在该controller类
  */
 @Api("医院管理添加")
 @RestController
@@ -74,11 +76,11 @@ public class ApiController {
     }
 
     /**
-     * 查询医院接口
+     * 查询医院信息接口
      * @param request
      * @return
      */
-    @ApiOperation("查询医院")
+    @ApiOperation("查询医院信息接口")
     @PostMapping("hospital/show")
     public Result<Hospital> getHospital(HttpServletRequest request){
 

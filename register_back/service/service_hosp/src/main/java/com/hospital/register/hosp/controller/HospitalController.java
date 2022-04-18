@@ -5,6 +5,7 @@ import com.hospital.register.common.result.Result;
 import com.hospital.register.hosp.service.HospitalService;
 import com.hospital.register.model.hosp.Hospital;
 import com.hospital.register.vo.hosp.HospitalQueryVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 
+/**
+ * 处理医院信息管理请求
+ * @author littlecheung
+ */
+@Api(tags = "医院管理接口")
 @RestController
 @RequestMapping("/admin/hosp/hospital")
 public class HospitalController {
@@ -45,12 +51,13 @@ public class HospitalController {
     @ApiOperation("更新医院上线状态接口")
     @GetMapping("updateHospStatus/{id}/{status}")
     public Result updateHospStatus(@PathVariable String id, @PathVariable Integer status){
+
         hospitalService.updateStatus(id,status);
         return Result.ok();
     }
 
     /**
-     * 医院详情信息接口
+     * 获取医院详情信息接口
      * @param id
      * @return
      */

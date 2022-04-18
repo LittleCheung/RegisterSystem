@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 医院基本信息
+ * @author littlecheung
+ */
 @Service
 public class HospitalServiceImpl implements HospitalService {
 
@@ -45,7 +49,7 @@ public class HospitalServiceImpl implements HospitalService {
             hospital.setStatus(hospitalExist.getStatus());
             hospital.setCreateTime(hospitalExist.getCreateTime());
         }else{
-            //不存在进行添加
+            //不存在进行添加，0为未上线，1为已上线
             hospital.setStatus(0);
             hospital.setCreateTime(new Date());
         }
@@ -54,9 +58,10 @@ public class HospitalServiceImpl implements HospitalService {
         hospitalRepository.save(hospital);
     }
 
+
     /**
      * 根据医院编号进行查询
-     * @param hoscode
+     * @param hoscode 医院编号
      * @return
      */
     @Override
@@ -99,7 +104,7 @@ public class HospitalServiceImpl implements HospitalService {
 
 
     /**
-     * 更新医院状态
+     * 更新医院上线状态
      * @param id
      * @param status
      */
@@ -115,7 +120,7 @@ public class HospitalServiceImpl implements HospitalService {
 
 
     /**
-     * 通过id获取医院信息
+     * 通过id获取医院详情信息
      * @param id
      * @return
      */
@@ -125,6 +130,7 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospital = this.setHospitalHosType(hospitalRepository.findById(id).get());
         Map<String, Object> result = new HashMap<>();
         result.put("hospital",hospital);
+
         result.put("bookingRule",hospital.getBookingRule());
         hospital.setBookingRule(null);
         return result;
@@ -133,7 +139,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     /**
      * 根据医院编号获取医院名称
-     * @param hoscode
+     * @param hoscode 医院编号
      * @return
      */
     @Override
@@ -147,8 +153,8 @@ public class HospitalServiceImpl implements HospitalService {
 
 
     /**
-     * 根据医院名称查询医院信息
-     * @param hosname
+     * 根据医院名称查询医院列表
+     * @param hosname 医院名称
      * @return
      */
     @Override
@@ -159,7 +165,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     /**
      * 根据医院编号获取医院预约挂号详情
-     * @param hoscode
+     * @param hoscode 医院编号
      * @return
      */
     @Override

@@ -16,14 +16,13 @@ import java.util.Map;
 @Api("排班管理接口")
 @RestController
 @RequestMapping("/admin/hosp/schedule")
-//@CrossOrigin
 public class ScheduleController {
 
     @Autowired
     private ScheduleService scheduleService;
 
     /**
-     * 根据hoscode和depcode查询排班规则，并进行分页
+     * 根据医院编号和科室编号分页查询排班规则数据
      * @param page
      * @param limit
      * @param hoscode
@@ -40,9 +39,9 @@ public class ScheduleController {
 
     /**
      * 根据医院编号、科室编号和工作日期，查询排班详细信息
-     * @param hoscode
-     * @param depcode
-     * @param workDate
+     * @param hoscode 医院编号
+     * @param depcode 可是编号
+     * @param workDate 工作日期
      * @return
      */
     @ApiOperation("查询排班详细信息")

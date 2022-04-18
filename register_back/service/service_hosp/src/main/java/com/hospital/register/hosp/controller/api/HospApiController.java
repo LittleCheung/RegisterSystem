@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-@Api("医院首页接口")
+/**
+ * 与前台首页医院展示数据相关的接口
+ * @author littlechueng
+ */
+@Api("医院管理接口")
 @RestController
 @RequestMapping("/api/hosp/hospital")
 public class HospApiController {
@@ -42,7 +46,6 @@ public class HospApiController {
     private ScheduleService scheduleService;
 
 
-
     /**
      * 查询医院列表并进行分页
      * @param page 当前页
@@ -55,24 +58,25 @@ public class HospApiController {
     public Result findHospList(@PathVariable Integer page,
                                @PathVariable Integer limit,
                                HospitalQueryVo hospitalQueryVo) {
+
         Page<Hospital> hospitals = hospitalService.selectHospPage(page, limit, hospitalQueryVo);
         return Result.ok(hospitals);
     }
 
     /**
-     * 根据医院名称查询医院信息
+     * 根据医院名称查询医院列表
      * @param hosname 医院名称
      * @return
      */
     @ApiOperation("根据医院名称查询")
     @GetMapping("findByHosName/{hosname}")
-    public Result findByHosName(@PathVariable String hosname) {
+    public Result findByHosname(@PathVariable String hosname) {
         List<Hospital> list = hospitalService.findByHosname(hosname);
         return Result.ok(list);
     }
 
     /**
-     * 根据医院编号获取科室
+     * 根据医院编号获取科室列表
      * @param hoscode 医院编号
      * @return
      */
@@ -154,7 +158,7 @@ public class HospApiController {
     }
 
     /**
-     * 根据hoscode获取医院签名信息
+     * 根据医院编号获取医院签名信息
      * @param hoscode 医院编号
      * @return
      */

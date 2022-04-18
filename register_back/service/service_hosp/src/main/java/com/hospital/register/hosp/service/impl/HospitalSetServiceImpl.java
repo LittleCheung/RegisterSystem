@@ -10,9 +10,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+/**
+ * 医院设置管理
+ * @author littlecheung
+ */
 @Service
 public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
 
+
+    /**
+     * 获取签名key
+     * @param hoscode
+     * @return
+     */
     @Override
     public String getSignKey(String hoscode) {
         QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
@@ -23,8 +33,8 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
     }
 
     /**
-     * 根据 hoscode获取医院签名信息
-     * @param hoscode
+     * 根据医院编号获取医院签名信息
+     * @param hoscode 医院编号
      * @return
      */
     @Override
@@ -41,5 +51,4 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
 
         return signInfoVo;
     }
-
 }

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.hospital")
 public class ServiceHospApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(ServiceHospApplication.class, args);
     }

@@ -51,7 +51,7 @@ public interface ScheduleService {
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
 
     /**
-     * 根据 {page}/{limit}/{hoscode}/{depcode} 获取可预约排班数据
+     * 根据医院编号和科室编号获取可预约排班数据
      * @param page
      * @param limit
      * @param hoscode

@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 处理医院设置管理请求
+ * @author littecheung
+ */
 @Api("医院设置管理")
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
-//@CrossOrigin //跨域
 public class HospitalSetController {
-
 
     @Autowired
     private HospitalSetService hospitalSetService;
@@ -40,15 +42,15 @@ public class HospitalSetController {
     }
 
     /**
-     * 逻辑删除医院
+     * 逻辑删除医院设置
      * @param id
      * @return
      */
     @ApiOperation("逻辑删除医院信息")
     @DeleteMapping("{id}")
     public Result removeHospSet(@PathVariable Long id){
-        boolean b = hospitalSetService.removeById(id);
-        if(b){
+        boolean flag = hospitalSetService.removeById(id);
+        if(flag){
             return Result.ok();
         }else{
             return Result.fail();
@@ -95,7 +97,6 @@ public class HospitalSetController {
     public Result saveHospitalSet(@RequestBody HospitalSet hospitalSet){
         //设置状态，1可使用，0不可使用
         hospitalSet.setStatus(1);
-
         //设置签名密钥
         Random random = new Random();
         hospitalSet.setSignKey(MD5.encrypt(System.currentTimeMillis() + "" + random.nextInt(1000)));
@@ -141,8 +142,10 @@ public class HospitalSetController {
         return batch ? Result.ok() : Result.fail();
     }
 
+
     /**
      * 医院设置锁定和解锁
+     * (医院锁定后不能再上传数据)
      * @param id
      * @param status
      * @return
@@ -152,26 +155,29 @@ public class HospitalSetController {
     public Result lockHospitalSet(@PathVariable Long id, @PathVariable Integer status){
         //根据id查询医院设置信息
         HospitalSet hospitalSet = hospitalSetService.getById(id);
+        //设置医院状态
         hospitalSet.setStatus(status);
         //更新信息
         hospitalSetService.updateById(hospitalSet);
         return Result.ok();
     }
 
+
     /**
      * 发送签名密钥
+     * (通过短信发送医院编号和签名key给医院方联系人，方便其对接接口)
      * @param id
      * @return
      */
     @ApiOperation("根据id发送签名密钥")
     @PutMapping("sendKey/{id}")
     public Result lockHospitalSet(@PathVariable Long id){
+
         HospitalSet hospitalSet = hospitalSetService.getById(id);
         String signKey = hospitalSet.getSignKey();
         String hoscode = hospitalSet.getHoscode();
         //TODO 发送短信
         return Result.ok();
-
     }
 }
 
