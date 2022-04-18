@@ -7,6 +7,11 @@ import com.hospital.register.model.cmn.Dict;
 import com.hospital.register.vo.cmn.DictEeVo;
 import org.springframework.beans.BeanUtils;
 
+/**
+ * 数据字典回调监听器
+ * (作为EasyExcel将excel导入数据字典的参数)
+ * @author littlecheung
+ */
 public class DictListener extends AnalysisEventListener<DictEeVo> {
 
     private DictMapper dictMapper;

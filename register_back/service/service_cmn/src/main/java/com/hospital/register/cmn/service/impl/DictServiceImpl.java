@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 数据字典管理
+ * @author littlecheung
+ */
 @Service
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
 
@@ -38,6 +42,18 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             dict.setHasChildren( this.isChildren(dict.getId()) );
         }
         return dictList;
+    }
+
+    /**
+     * 判断数据id下面是否有子结点
+     * @param id
+     * @return
+     */
+    private boolean isChildren(Long id){
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
+        wrapper.eq("parent_id", id);
+        Integer count = baseMapper.selectCount(wrapper);
+        return  count > 0;
     }
 
     /**
@@ -73,7 +89,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     /**
-     * 将excel文件导入数据库
+     * 将excel文件导入数据字典
      * allEntries = true：方法调用后清空所有缓存
      * @param file
      */
@@ -87,31 +103,17 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         }
     }
 
-
     /**
-     * 判断id下面是否有子结点
-     * @param id
+     * 根据上级编码与值获取数据字典名称
+     * @param dictCode 上级编码
+     * @param value 值
      * @return
      */
-    private boolean isChildren(Long id){
-        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
-        wrapper.eq("parent_id", id);
-        Integer count = baseMapper.selectCount(wrapper);
-        return  count > 0;
-    }
-
-
-    /**
-     * 根据dictcode和value进行查询
-     * @param dictCode
-     * @param value
-     * @return
-     */
+    @Cacheable(value = "dict",keyGenerator = "keyGenerator")
     @Override
     public String getDictName(String dictCode, String value) {
         //如果dictCode为空，直接根据value查询
         if(StringUtils.isEmpty(dictCode)){
-            //直接根据value查询
             Dict dict = baseMapper.selectOne(new QueryWrapper<Dict>().eq("value",value));
             if(dict == null) {
                 return null;
@@ -140,6 +142,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
      */
     @Override
     public List<Dict> findByDictCode(String dictCode) {
+
         //根据dictcode查询dict对象，得到dict的id值
         QueryWrapper<Dict> wrapper = new QueryWrapper<>();
         wrapper.eq("dict_code", dictCode);

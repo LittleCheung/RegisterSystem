@@ -12,6 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * 处理数据字典相关请求
+ * @author littlecheung
+ */
 @Api("数据字典管理")
 @RestController
 @RequestMapping("/admin/cmn/dict")
@@ -34,7 +38,7 @@ public class DictController {
 
 
     /**
-     * dict数据导出到excel
+     * 将dict数据导出到excel
      * @param response
      */
     @ApiOperation("dict数据导出到excel")
@@ -45,7 +49,7 @@ public class DictController {
 
 
     /**
-     * 导入数据字典
+     * 将excel导入数据字典
      * @param file
      * @return
      */
@@ -89,7 +93,7 @@ public class DictController {
      * @param dictCode
      * @return
      */
-    @ApiOperation("")
+    @ApiOperation("根据dictCode获取下级结点")
     @GetMapping("findByDictCode/{dictCode}")
     public Result findByDictCode(@PathVariable String dictCode){
         List<Dict> list = dictService.findByDictCode(dictCode);
