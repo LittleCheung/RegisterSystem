@@ -35,7 +35,7 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
     private HospitalFeignClient hospitalFeignClient;
 
     /**
-     * 向支付记录表中添加支付记录
+     * 向支付记录表中添加支付记录，保存交易记录
      * @param order 订单
      * @param paymentType 支付类型
      */
@@ -50,7 +50,7 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
             //说明存在记录，直接返回，不用再存数据库
             return;
         }
-        //添加记录
+        //添加交易记录
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setCreateTime(new Date());
         paymentInfo.setOrderId(order.getId());

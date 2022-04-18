@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * 前台提交订单接口
+ */
 @Api("订单接口")
 @RestController
 @RequestMapping("/api/order/orderInfo")

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.Map;
 
 public interface OrderService extends IService<OrderInfo> {
+
     /**
      * 根据scheduleId patientId生成挂号订单接口
      * @param scheduleId
@@ -53,7 +54,7 @@ public interface OrderService extends IService<OrderInfo> {
     Map<String,Object> getCountMap(OrderCountQueryVo orderCountQueryVo);
 
     /**
-     * 根据 订单会员人、就诊人、订单状态等信息，查询订单列表，并进行分页
+     * 获取分页列表
      * @param pageParam
      * @param orderQueryVo
      * @return

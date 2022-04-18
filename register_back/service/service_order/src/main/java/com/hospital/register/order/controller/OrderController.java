@@ -1,4 +1,4 @@
-package com.hospital.register.order.controller.admin;
+package com.hospital.register.order.controller;
 
 import com.hospital.register.common.result.Result;
 import com.hospital.register.enums.OrderStatusEnum;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @Api("后台订单接口")
 @RestController
 @RequestMapping("/admin/order")
-public class AdminOrderController {
+public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
 
     /**
-     * 返回订单状态
+     * 获取订单状态
      * @return
      */
     @ApiOperation("获取订单状态")
@@ -31,8 +31,9 @@ public class AdminOrderController {
         return Result.ok(OrderStatusEnum.getStatusList());
     }
 
+
     /**
-     * 根据 订单会员人、就诊人、订单状态等信息，查询订单列表，并进行分页
+     * 获取订单分页列表
      * @param page
      * @param limit
      * @param orderQueryVo
@@ -61,7 +62,7 @@ public class AdminOrderController {
     }
 
     /**
-     * 根据订单 id 查询订单详情
+     * 根据订单id查询订单详情
      * @param orderId
      * @return
      */

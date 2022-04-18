@@ -65,27 +65,24 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Long saveOrder(String scheduleId, Long patientId) {
+        //TODO 该方法代码过于臃肿，可以考虑提取出部分代码进行调用
         //获取就诊人信息
         Patient patient = patientFeignClient.getPatientOrder(patientId);
         if(null == patient) {
             throw new RegisterException(ResultCodeEnum.PARAM_ERROR);
         }
-
         //获取排班相关信息
         ScheduleOrderVo scheduleOrderVo = hospitalFeignClient.getScheduleOrderVo(scheduleId);
         if(null == scheduleOrderVo) {
             throw new RegisterException(ResultCodeEnum.PARAM_ERROR);
         }
-
         //判断当前时间是否还可以预约：当前时间不可以预约
         if(new DateTime(scheduleOrderVo.getStartTime()).isAfterNow()
                 || new DateTime(scheduleOrderVo.getEndTime()).isBeforeNow()) {
             throw new RegisterException(ResultCodeEnum.TIME_NO);
         }
-
         //获取签名信息
         SignInfoVo signInfoVo = hospitalFeignClient.getSignInfoVo(scheduleOrderVo.getHoscode());
-
         //添加到订单表
         OrderInfo orderInfo = new OrderInfo();
         BeanUtils.copyProperties(scheduleOrderVo, orderInfo);
@@ -104,7 +101,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("hoscode",orderInfo.getHoscode());
         paramMap.put("depcode",orderInfo.getDepcode());
-
         /**
          * 根据前端传过来的scheduleId查询hosScheduleId
          * 由于该项目数据存储设计不合理，这里存在mongodb中的主键id与MySQL数据库表中的id不一致
@@ -114,7 +110,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
         if(scheduleById!=null){
             hosScheduleIdTemp = scheduleById.getHosScheduleId();
         }
-
         Long hosScheduleId = null;
         try {
             hosScheduleId = Long.parseLong(hosScheduleIdTemp);
@@ -145,10 +140,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
         paramMap.put("timestamp", HttpRequestHelper.getTimestamp());
         String sign = HttpRequestHelper.getSign(paramMap, signInfoVo.getSignKey());
         paramMap.put("sign", sign);
-
         //请求医院系统接口
         JSONObject result = HttpRequestHelper.sendRequest(paramMap, signInfoVo.getApiUrl()+"/order/submitOrder");
-
         //请求成功，获取数据
         if(result.getInteger("code") == 200){
             JSONObject jsonObject = result.getJSONObject("data");
@@ -177,7 +170,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
             orderMqVo.setScheduleId(scheduleId);
             orderMqVo.setReservedNumber(reservedNumber);
             orderMqVo.setAvailableNumber(availableNumber);
-
             //短信提示
             MsmVo msmVo = new MsmVo();
             msmVo.setPhone(orderInfo.getPatientPhone());
@@ -193,10 +185,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
             }};
             msmVo.setParam(param);
             orderMqVo.setMsmVo(msmVo);
-
             //使用mq发送信息：参数为交换机、路由键、排班更新实体
             rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_ORDER, MqConst.ROUTING_ORDER, orderMqVo);
-
         }else{
             throw new RegisterException(result.getString("message"), ResultCodeEnum.FAIL.getCode());
         }
@@ -264,7 +254,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
         pages.getRecords().stream().forEach(item ->{
             this.packOrderInfo(item);
         });
-
         return pages;
     }
 
@@ -284,7 +273,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
             //超过当前时间，不能取消
             throw new RegisterException(ResultCodeEnum.CANCEL_ORDER_NO);
         }
-
         //调用医院模拟系统进行取消预约
         //查询签名
         SignInfoVo signInfoVo = hospitalFeignClient.getSignInfoVo(orderInfo.getHoscode());
@@ -366,7 +354,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
     }
 
     /**
-     * 预约统计图表
+     * 获取医院每天平台预约数据（用于预约统计图表）
      * @param orderCountQueryVo 订单统计对象
      * @return
      */
@@ -385,7 +373,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,OrderInfo> impleme
     }
 
     /**
-     * 根据订单用户、就诊人、订单状态等信息，查询订单列表，并进行分页
+     * 获取订单分页列表
      * @param pageParam
      * @param orderQueryVo
      * @return
