@@ -28,6 +28,7 @@ public class MsmApiController {
      */
     @GetMapping("send/{phone}")
     public Result sendCode(@PathVariable String phone){
+
         //从redis里面获取，key为手机号，value为验证码
         String code = redisTemplate.opsForValue().get(phone);
         if(!StringUtils.isEmpty(code)){

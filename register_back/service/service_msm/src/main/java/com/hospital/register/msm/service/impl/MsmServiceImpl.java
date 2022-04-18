@@ -22,13 +22,14 @@ import java.util.Map;
 public class MsmServiceImpl implements MsmService {
 
     /**
-     * 发送短信服务
+     * 发送手机验证码
      * @param phone 手机号
      * @param code 验证码
      * @return
      */
     @Override
     public boolean send(String phone, String code) {
+
         //判断手机号是否为空
         if(StringUtils.isEmpty(phone)){
             return false;
@@ -72,7 +73,7 @@ public class MsmServiceImpl implements MsmService {
 
 
     /**
-     * mq使用的订单发送短信服务
+     * mq使用的订单发送手机验证码
      * @param msmVo 短信实体对象
      * @return
      */
@@ -84,7 +85,12 @@ public class MsmServiceImpl implements MsmService {
         }
         return false;
     }
-
+    /**
+     * mq发送短信的具体逻辑
+     * @param phone
+     * @param param
+     * @return
+     */
     private boolean send(String phone, Map<String,Object> param){
 
         //判断手机号是否为空

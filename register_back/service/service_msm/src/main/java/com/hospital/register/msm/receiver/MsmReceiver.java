@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MsmReceiver {
+
     @Autowired
     private MsmService msmService;
 
@@ -25,7 +26,6 @@ public class MsmReceiver {
             key = {MqConst.ROUTING_MSM_ITEM}
             ))
     public void send(MsmVo msmVo){
-        System.out.println("发送短信给用户啦~");
         msmService.send(msmVo);
     }
 

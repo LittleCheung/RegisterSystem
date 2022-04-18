@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * 服务器启动就读取配置文件中短信发送相关信息的工具类
+ * 服务器启动就读取配置文件中短信发送相关信息配置类
  */
 @Component
 public class ConstantPropertiesUtils implements InitializingBean {
