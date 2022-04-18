@@ -20,6 +20,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
+/**
+ * Redis配置类
+ * @author littlecheung
+ */
 @Configuration
 @EnableCaching
 public class RedisConfig {

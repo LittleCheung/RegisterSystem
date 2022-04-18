@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * 下单工具类
+ */
 @Slf4j
 public class HttpRequestHelper {
 
